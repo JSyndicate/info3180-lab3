@@ -7,7 +7,7 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from forms import ContactForm
+from .forms import ContactForm
 from app import mail
 from flask_mail import Message
  
@@ -34,9 +34,10 @@ def contact():
         txt = Message("form.subject.data", sender=("form.name.data","form.email.data"), recipients=["form.email.data"])
         txt.body = 'This is the body of the message'
         mail.send(txt)
-    else:
         flash('Your Email was sent successfully')
-        return redirect(url_for('/'))
+        return redirect(url_for('home'))
+        
+        
     return render_template('contact.html', form=form)
 
     
